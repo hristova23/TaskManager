@@ -25,6 +25,18 @@ namespace TaskManager.Controllers
             return View(await _context.Task.ToListAsync());
         }
 
+        // GET: Tasks/ShowSearchForm
+        public async Task<IActionResult> ShowSearchForm()
+        {
+            return View();
+        }
+
+        // POST: Tasks/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(String SearchPhrase)
+        {
+            return View("Index", await _context.Task.Where(i=>i.TaskDescription.Contains(SearchPhrase)).ToListAsync());
+        }
+
         // GET: Tasks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
